@@ -13,8 +13,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator json {
+  provider = "prisma-json-types-generator"
+}
+
 model User {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   email   String   @unique
   name    String?
+}
+
+model Doc {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId    String   @db.String
+  title      String   @db.String
+  editorJson Json?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime? @updatedAt
+
+  @@index([ownerId, id])
 }
