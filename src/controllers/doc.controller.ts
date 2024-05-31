@@ -20,4 +20,9 @@ export class DocController {
   updateDoc(@Param('id') Id: string, @Body() data: Prisma.DocCreateInput): any {
     return this.appService.updatePost(Id, data);
   }
+
+  @Get('/:id')
+  getById(@Param('id') Id: string): any {
+    return this.appService.getById(Id);
+  }
 }

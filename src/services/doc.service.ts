@@ -10,6 +10,14 @@ export class DocService {
     return this.prisma.doc.findMany({});
   }
 
+  async getById(id: string): Promise<Doc> {
+    return this.prisma.doc.findFirst({
+      where: {
+        id: id,
+      },
+    });
+  }
+
   async createPost(data: Prisma.DocCreateInput): Promise<Doc> {
     try {
       return this.prisma.doc.create({
